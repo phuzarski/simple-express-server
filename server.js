@@ -13,11 +13,6 @@ app.all('/*', function(req, res, next) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-var animals = [
-  "puppy",
-  "gowno",
-  "bleh"
-];
 
 var artists = [
   {
@@ -33,14 +28,26 @@ var artists = [
   "email": "test2@test2.pl",
   "pass" : "pass_test2",
   "pass_conf": "pass_conf_test2"
+},
+{
+  "id": 3,
+  "name": "Patryk",
+  "email": "patryk@o2.pl",
+  "pass": "haslo123",
+  "pass_conf": "haslo123"
 }
-]
-app.get('/animals', function(req, res) {
-  res.send(animals);
-});
+];
+
 
 app.get('/artists', function(req, res) {
   res.send(artists);
 });
+
+app.post('/artists', function(req, res) {
+  var artist = req.body;
+  console.log(req.body);
+  artists.push(artist);
+  req.status(200).send("Dodano artyste!");
+})
 
 app.listen(6060);
